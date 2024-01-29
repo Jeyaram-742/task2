@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects To-Do List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #99a8bb;
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+
+        #tasks {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .task {
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .task label {
+            flex-grow: 1;
+            margin-right: 10px;
+        }
+
+        .task button {
+            background-color: #dc3545;
+            color: #fff;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        #newTaskForm {
+            width: 40%;
+            margin-top: 20px;
+            margin-left: 20px;
+            margin-right: 20px;
+            margin-bottom: 20px;
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 5px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input, select {
+            width: 50%;
+            padding: 8px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+
+        button[type="button"] {
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button[type="button"]:hover,
+        .task button:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <h1>Website Projects To-Do List</h1>
+    
+    
+   <center>
+    <form align="center"id="newTaskForm" >
+        <label for="task">New Task:</label>
+        <input type="text" id="task" required>
+        <label for="deadline">Deadline:</label>
+        <input type="date" id="deadline" required>
+        <label for="priority">Priority:</label>
+        <select id="priority">
+            <option value="high">High</option>
+            <option value="medium">Medium</option>
+            <option value="low">Low</option>
+        </select>
+        <br>
+        <button type="button" onclick="addTask()">Add Task</button>
+    </form>
+</center>
+    <br>
+    <ul id="tasks"></ul>
+
+    <script>
+        function addTask() {
+            const taskInput = document.getElementById('task');
+            const deadlineInput = document.getElementById('deadline');
+            const priorityInput = document.getElementById('priority');
+
+            const tasksList = document.getElementById('tasks');
+
+            const taskItem = document.createElement('li');
+            taskItem.className = 'task';
+
+            taskItem.innerHTML = `
+                <label>${taskInput.value} (Deadline: ${deadlineInput.value}, Priority: ${priorityInput.value})</label>
+                <button onclick="removeTask(this)">Remove</button>
+            `;
+
+            tasksList.appendChild(taskItem);
+
+            taskInput.value = '';
+            deadlineInput.value = '';
+            priorityInput.value = 'high';
+        }
+
+        function removeTask(button) {
+            const taskItem = button.parentNode;
+            taskItem.parentNode.removeChild(taskItem);
+        }
+    </script>
+</body>
+</html>
